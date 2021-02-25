@@ -27,3 +27,13 @@ $router->group(['prefix' => 'api'], function($router){
     $router->get('emargement/{id}', 'EmployeController@show');
 
 });
+
+$router->group(['middleware' => 'auth:api','prefix' => 'auth'], function ($router) {
+    $router->post('logout', 'AuthController@logout');
+    $router->post('refresh', 'AuthController@refresh');
+    $router->get('me', 'AuthController@me');
+    $router->post('register', 'AuthController@register');
+});
+$router->group(['prefix' => 'auth'], function ($router) {
+    $router->post('login', 'AuthController@login');
+});
